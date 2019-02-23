@@ -32,16 +32,16 @@ int classify(int a, int b) {
 	return 10;
 }
 
-int memo(int i) {
+int memo(int begin) {
 	//base case
-	if (i == N.size()) return 0;
+	if (begin == N.size()) return 0;
 	//memoization
-	int& ret = cache[i];
+	int& ret = cache[begin];
 	if (ret != -1) return ret;
 	ret = INF;
 	for (int len = 3; len <= 5; len++) {
-		if (i + len <= N.size()) {
-			ret = min(ret, memo(i + len) + classify(i, i + len - 1));
+		if (begin + len <= N.size()) {
+			ret = min(ret, memo(begin + len) + classify(begin, begin + len - 1));
 		}
 	}
 	return ret;
